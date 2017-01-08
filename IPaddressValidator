@@ -1,0 +1,69 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.omg.Messaging.SyncScopeHelper;
+
+
+public class Solution {
+	public static String file="4\n121.18.19.20\n2001:0db8:0000:0000:0000:ff00:0042:8329";
+
+	
+public static void main(String[] args) throws FileNotFoundException {
+        
+     // Scanner scan =new Scanner(new FileReader("test"));
+      
+      Solution sol=new Solution();
+      sol.solutionIP(file);
+}
+
+
+      public void solutionIP(String  file)
+      {
+    	  StringBuilder sb= new StringBuilder();
+    	  String[] s1= file.split("\n");
+    	  
+    	  
+    	  List<String> s = new ArrayList<String>();
+    	  
+      for(int i=0;i<s1.length;i++){
+    	  s.add(s1[i].trim());
+      }
+       System.out.println(s);
+       
+       int n = Integer.parseInt(s.get(0));
+      
+      for(int j=0;j<s.size();j++)
+      {
+    	  //check for IPv4 address
+    	  Pattern pattIPv4=Pattern.compile("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+    	  Matcher matcIPv4=pattIPv4.matcher(s.get(j));
+    	  
+    	 Pattern pattIPv6=Pattern.compile("^[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){7}$");
+    	Matcher matcIPv6=pattIPv6.matcher(s.get(j));
+    	 
+    	 if(matcIPv4.matches()){
+    		sb.append("IPv4\n");
+    	}
+    	else if(matcIPv6.matches()) {
+    		sb.append("IPV6\n");
+    		
+    	}
+    	else{
+    		sb.append("Not an IPV4 address\n");
+    	}
+    	  
+    	  
+      }
+        System.out.println(sb);
+        /* Enter your cogrge here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    }
+}
+
+
+
